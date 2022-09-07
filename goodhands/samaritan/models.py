@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Category(models.Model):
-    id = models.BigAutoField()
+    id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=60, unique=True)
 
 class Institution(models.Model):
@@ -15,13 +15,14 @@ class Institution(models.Model):
         (local, 'Zbiórka lokalna')
     ]
 
-    id = models.BigAutoField()
+    id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=60, unique=True)
     description = models.CharField(max_length=255)
     type = models.CharField(max_length=15, choices=TYPE_CHOICES, default=fund)
     categories = models.ManyToManyField(Category)
 
 class Donation(models.Model):
+    id = models.BigAutoField(primary_key=True)
     quantity = models.IntegerField()
     categories = models.ManyToManyField(Category)
     institution = models.ForeignKey(Institution, on_delete=models.PROTECT)
@@ -31,4 +32,4 @@ class Donation(models.Model):
     pick_up_date = models.DateField()
     pick_up_time = models.TimeField()
     pick_up_comment = models.CharField(max_length=120)
-    user = models.ForeignKey(User, blank=True, default=None)
+    user = models.ForeignKey(User, blank=True, default=None, on_delete=models.PROTECT)
