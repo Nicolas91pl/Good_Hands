@@ -21,7 +21,8 @@
 
     <section class="login-page">
       <h2>Załóż konto</h2>
-      <form>
+      <form action="" method="POST">
+        {% csrf_token %}
         <div class="form-group">
           <input type="text" name="name" placeholder="Imię" />
         </div>
@@ -39,7 +40,7 @@
         </div>
 
         <div class="form-group form-group--buttons">
-          <a href="login.html" class="btn btn--without-border">Zaloguj się</a>
+          <a href="/login" class="btn btn--without-border">Zaloguj się</a>
           <button class="btn" type="submit">Załóż konto</button>
         </div>
       </form>
