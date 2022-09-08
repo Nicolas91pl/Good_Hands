@@ -5,14 +5,26 @@ from django.contrib.auth.models import User
 
 class LandingPage(View):
     def get(self, request):
+        donations = list(Donation.objects.all())
+        organizations = list(Institution.objects.all())
+        quantity_sum = 0
+        for don in donations:
+            quantity_sum = quantity_sum + int(don.quantity)
+
+        organization_sum = len(organizations)
+        
         fundations = list(Institution.objects.filter(type='fund'))
         non_gov_orgs = list(Institution.objects.filter(type='non_gov_org'))
         local_gathering = list(Institution.objects.filter(type='local'))
+
         ctx = {
+            "quantity_sum": quantity_sum,
+            "organization_sum": organization_sum,
             'fundations': fundations,
             'non_gov_orgs': non_gov_orgs,
             'local_gathering': local_gathering
-        }
+            }
+     
         return render(request, "index.html", ctx)
 
 class AddDonation(View):
