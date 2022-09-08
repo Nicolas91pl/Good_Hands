@@ -1,10 +1,19 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from samaritan.models import Donation, Institution, Category
 from django.contrib.auth.models import User
 
 class LandingPage(View):
     def get(self, request):
-        return render(request, "index.html")
+        fundations = list(Institution.objects.filter(type='fund'))
+        non_gov_orgs = list(Institution.objects.filter(type='non_gov_org'))
+        local_gathering = list(Institution.objects.filter(type='local'))
+        ctx = {
+            'fundations': fundations,
+            'non_gov_orgs': non_gov_orgs,
+            'local_gathering': local_gathering
+        }
+        return render(request, "index.html", ctx)
 
 class AddDonation(View):
     def get(self, request):
