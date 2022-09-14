@@ -5,6 +5,12 @@ class Category(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=60, unique=True)
 
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
 class Institution(models.Model):
     fund = 'fund'
     non_gov_org = 'non_gov_org'
