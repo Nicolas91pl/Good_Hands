@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views import View
 from samaritan.models import Donation, Institution, Category
@@ -48,9 +48,15 @@ class Login(View):
         password = request.POST.get("password")
         user = authenticate(username=email, password=password)
         if user is not None:
+            login(request, user)
             return redirect('/start')
         else:
             return redirect('/register')
+
+class Logout(View):
+    def get(self, request):
+        logout(request)
+        return redirect('/start')
 
 class Register(View):
     def get(self, request):
