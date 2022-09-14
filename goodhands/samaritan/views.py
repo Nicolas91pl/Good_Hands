@@ -37,7 +37,14 @@ class LandingPage(View):
 
 class AddDonation(View):
     def get(self, request):
-        return render(request, "form.html")
+        if request.user.is_authenticated:
+            categories = list(Category.objects.all())
+            ctx = {
+                "categories": categories,
+            }
+            return render(request, "form.html", ctx)
+        else:
+            return redirect('/login')
 
 class Login(View):
     def get(self, request):
