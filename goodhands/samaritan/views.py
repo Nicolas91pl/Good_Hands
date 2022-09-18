@@ -99,8 +99,13 @@ class Register(View):
             return redirect(f'/login')
 
 class Profil(View):
-    def get(selfself, request):
+    def get(self, request):
         if request.user.is_authenticated:
-            return render(request, 'profil.html')
+            user = request.user.id
+            donations = list(Donation.objects.filter(user=user))
+            ctx = {
+                'donations': donations,
+                }
+            return render(request, 'profil.html', ctx)
         else:
             return redirect(f'/login')

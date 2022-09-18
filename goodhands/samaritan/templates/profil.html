@@ -19,7 +19,27 @@
           <em>Email: </em>
           <h3>{{ user.email }}</h3>
         </div>
+      </div>
 
+      <div class="help--slides active" data-id="1">
+        <p>Przekazane dary</p>
+
+        <ul class="help--slides-items">
+          {% for donation in donations %}
+          <li>
+            <div class="col">
+              <div class="title">{{ donation.institution }}</div>
+              <div class="subtitle">Ilość worków: {{ donation.quantity }}</div>
+            </div>
+
+              <div class="col">
+                <div class="text">Kategorie: {{ donation.get_categories }}</div>
+            </div><div class="col">
+                <div class="text">Data i godzina odbioru: {{ donation.pick_up_date }}, {{ donation.pick_up_time }}</div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
       </div>
     </section>
 

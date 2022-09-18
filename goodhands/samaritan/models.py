@@ -45,3 +45,10 @@ class Donation(models.Model):
     pick_up_comment = models.CharField(max_length=120)
     # phone = models.CharField(max_length=12)
     user = models.ForeignKey(User, blank=True, default=None, on_delete=models.PROTECT)
+
+    # def get_categories(self, obj):
+    #     categories = list(obj.categories.all())
+    #     cat_name_list = []
+    #     for category in categories:
+    #         cat_name_list.append(category.name)
+    #     return ", ".join(cat_name_list)
