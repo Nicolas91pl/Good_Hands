@@ -46,6 +46,24 @@ class AddDonation(View):
         else:
             return redirect('/login')
 
+    def post(self, request):
+        categories = request.POST.get("categories")
+        bags = request.POST.get("bags")
+        organization = request.POST.get("organization")
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        postcode = request.POST.get('postcode')
+        phone = request.POST.get('phone')
+        data = request.POST.get('data')
+        time = request.POST.get('time')
+        more_info = request.POST.get('more_info')
+        return Donation.objects.create(quantity=bags, categories=categories,
+                                       institution=organization, address=address,
+                                       city=city, zip_code=postcode, pick_up_date=data,
+                                       pick_up_time=time, pick_up_comment=more_info
+                                        )
+
+
 class Login(View):
     def get(self, request):
         return render(request, "login.html")
