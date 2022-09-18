@@ -39,14 +39,17 @@ class AddDonation(View):
     def get(self, request):
         if request.user.is_authenticated:
             categories = list(Category.objects.all())
+            institutions = list(Institution.objects.all())
             ctx = {
                 "categories": categories,
+                "institutions": institutions
             }
             return render(request, "form.html", ctx)
         else:
             return redirect('/login')
 
     def post(self, request):
+        user = request.user.username
         categories = request.POST.get("categories")
         bags = request.POST.get("bags")
         organization = request.POST.get("organization")
@@ -57,11 +60,17 @@ class AddDonation(View):
         data = request.POST.get('data')
         time = request.POST.get('time')
         more_info = request.POST.get('more_info')
-        return Donation.objects.create(quantity=bags, categories=categories,
+
+        Donation.objects.create(quantity=bags, categories=categories,
                                        institution=organization, address=address,
                                        city=city, zip_code=postcode, pick_up_date=data,
-                                       pick_up_time=time, pick_up_comment=more_info
+                                       pick_up_time=time, pick_up_comment=more_info, user=user
                                         )
+        return redirect("/adddonation/confirmation")
+
+class FormConfirmation(View):
+    def get(self, request):
+        return render(request, "form-confirmation.html")
 
 
 class Login(View):

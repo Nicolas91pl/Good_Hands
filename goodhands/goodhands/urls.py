@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from samaritan.views import LandingPage, Login, Register, AddDonation, Logout
+from samaritan.views import LandingPage, Login, Register, AddDonation, Logout, FormConfirmation
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +24,6 @@ urlpatterns = [
     path('logout/', Logout.as_view()),
     path('register/', Register.as_view()),
     path('adddonation/', AddDonation.as_view()),
+    path('adddonation/confirmation', FormConfirmation.as_view()),
 
 ]
