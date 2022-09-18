@@ -97,3 +97,10 @@ class Register(View):
         if password == password2:
             User.objects.create(username=email, first_name=name, last_name=surname, email=email, password=password)
             return redirect(f'/login')
+
+class Profil(View):
+    def get(selfself, request):
+        if request.user.is_authenticated:
+            return render(request, 'profil.html')
+        else:
+            return redirect(f'/login')
