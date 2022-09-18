@@ -38,4 +38,5 @@ class Donation(models.Model):
     pick_up_date = models.DateField()
     pick_up_time = models.TimeField()
     pick_up_comment = models.CharField(max_length=120)
+    # phone = models.CharField(max_length=12)
     user = models.ForeignKey(User, blank=True, default=None, on_delete=models.PROTECT)
