@@ -26,6 +26,11 @@ class Institution(models.Model):
     description = models.CharField(max_length=255)
     type = models.CharField(max_length=15, choices=TYPE_CHOICES, default=fund)
     categories = models.ManyToManyField(Category)
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
 
 class Donation(models.Model):
     id = models.BigAutoField(primary_key=True)
