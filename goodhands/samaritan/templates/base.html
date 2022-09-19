@@ -9,6 +9,38 @@
     <link rel="stylesheet" href={% static "css/style.css" %}/>
   </head>
   <body>
+  <header class="header--main-page">
+      <nav class="container container--70">
+        {% if user.is_anonymous %}
+          <ul class="nav--actions">
+            <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
+            <li><a href="/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+          </ul>
+        {% else %}
+          <ul class="nav--actions">
+            <li class="logged-user">
+              Witaj {{ user.username }}!
+              <ul class="dropdown">
+                {% if user.is_superuser %}
+                <li><a href="/admin">Panel administratora</a></li>
+                {% endif %}
+                <li><a href="/profil">Profil</a></li>
+                <li><a href="#">Ustawienia</a></li>
+                <li><a href="/logout">Wyloguj</a></li>
+              </ul>
+            </li>
+          </ul>
+        {% endif %}
+
+        <ul>
+          <li><a href="" class="btn btn--without-border active">Start</a></li>
+          <li><a href="#steps" class="btn btn--without-border">O co chodzi?</a></li>
+          <li><a href="#about-us" class="btn btn--without-border">O nas</a></li>
+          <li><a href="#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
+          <li><a href="/adddonation" class="btn btn--without-border">Przekaż dary</a></li>
+          <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
+        </ul>
+      </nav>
 {% block content %}{% endblock content %}
   </body>
   <footer>

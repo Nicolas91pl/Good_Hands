@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from samaritan.views import LandingPage, Login, Register, AddDonation
+from samaritan.views import LandingPage, Login, Register, AddDonation, Logout, Profil
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('start/', LandingPage.as_view()),
     path('login/', Login.as_view()),
+    path('logout/', Logout.as_view()),
     path('register/', Register.as_view()),
     path('adddonation/', AddDonation.as_view()),
+    path('profil/', Profil.as_view()),
 
 ]
